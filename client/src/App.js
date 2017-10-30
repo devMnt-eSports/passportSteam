@@ -1,27 +1,23 @@
+
+/* -------------------<  App.JS   >-------------------- */
+
 import React, { Component } from 'react';
 import './App.css';
+import router from "./router.js";
+import Nav from './Nav';
+import LoginControl from './LoginControl';
 
-class App extends Component {
-  state = {users: []}
 
-  componentDidMount() {
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => this.setState({ users }));
-  }
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Users</h1>
-        {this.state.users.map(user =>
-          <div key={user.id}>{user.username}</div>
-        )}
-        <h2>Welcome! Please log in.</h2>
-        <p><a href="auth/steam">Sign On with Steam</a></p>
+  const App = () => 
+  <div className="App">
+    <Nav />
+      <div id="App__routerContainer">
+          { router }
+          <p>ʕ·ᴥ·ʔ This is a message from const App (client/src/app.js)</p>
       </div>
-    );
-  }
-}
+  </div>;
+
 
 export default App;
+

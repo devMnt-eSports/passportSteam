@@ -7,12 +7,12 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const util = require('util');
 const session = require('express-session');
-const SteamStrategy = require('passport-steam').Strategy;
+const SteamStrategy = require('passport-openid').Strategy;
 
 // Express routes.
 const index = require('./routes/index');
 const authRoutes = require('./routes/auth');
-const users = require('./routes/users');
+// const users = require('./routes/users');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -34,8 +34,8 @@ passport.deserializeUser(function(obj, done) {
 //   credentials (in this case, an OpenID identifier and profile), and invoke a
 //   callback with a user object.
 passport.use(new SteamStrategy({
-    returnURL: 'http://localhost:3004/auth/steam/return',
-    realm: 'http://localhost:3004/',
+    returnURL: 'http://localhost:3000/auth/steam/return',
+    realm: 'http://localhost:3000/',
     apiKey: 'D6591C27E03833FB16773BAF76840E39'
   },
   function(identifier, profile, done) {
@@ -79,7 +79,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+// app.use('/users', users);
 
 // See views/auth.js for authentication routes
 app.use('/auth', authRoutes);
